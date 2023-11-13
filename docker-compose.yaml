@@ -2,7 +2,7 @@ version: '3.7'
 
 # Settings and configurations that are common for all minio{1...4} containers
 x-minio-common: &minio-common
-  image: minio/minio:latest
+  image: quay.io/minio/minio:RELEASE.2023-11-11T08-14-41Z
   command: server http://minio{1...4}/data{1...2} --console-address ":9001"
   expose:
     - "9000"
@@ -11,7 +11,7 @@ x-minio-common: &minio-common
     MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minio}
     MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASS:-minio123}
     MINIO_REGION_NAME: ${MINIO_REGION_NAME}
-    MINIO_SERVER_URL: https://${FQDN}
+    MINIO_BROWSER_REDIRECT_URL: https://${FQDN}
     MINIO_PROMETHEUS_AUTH_TYPE: "public"
   healthcheck:
     test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
@@ -94,7 +94,7 @@ services:
     restart: on-failure
 
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:8.4.11
     expose:
       - 3000
     volumes:
