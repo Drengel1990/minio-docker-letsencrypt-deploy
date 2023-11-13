@@ -125,8 +125,8 @@ server {
     }
 
     location /grafana {
-	proxy_set_header   Host $host;
-	proxy_pass http://grafana:3000/;
-	rewrite  ^/grafana/(.*)  /$1 break;
+        proxy_set_header   Host $host;
+        proxy_pass http://grafana:3000/;
+        rewrite  ^/grafana/(.*)  /$1 break;
     }
 }
