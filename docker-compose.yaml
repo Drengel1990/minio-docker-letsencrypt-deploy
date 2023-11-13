@@ -11,7 +11,9 @@ x-minio-common: &minio-common
     MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minio}
     MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASS:-minio123}
     MINIO_REGION_NAME: ${MINIO_REGION_NAME}
-    MINIO_BROWSER_REDIRECT_URL: https://${FQDN}
+    MINIO_DOMAIN: ${FQDN}
+    MINIO_BROWSER_REDIRECT_URL: https://${FQDN}/console
+
     MINIO_PROMETHEUS_AUTH_TYPE: "public"
   healthcheck:
     test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
